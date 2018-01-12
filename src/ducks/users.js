@@ -18,6 +18,7 @@ export function getUserInfo() {
     }
 }
 
+// sim3 83E
 export function changeUserInfo(edit) {
     return {
         type: CHANGE_USER_INFO,

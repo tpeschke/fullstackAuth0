@@ -59,4 +59,5 @@ function mapStateToProps(state) {
     }
 }
 
+// sim3 83C
 export default connect(mapStateToProps, { changeUserInfo })(EditProfile)
