@@ -63,7 +63,7 @@ passport.deserializeUser((id, done) => {
 
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000/#/private',
+    successRedirect: 'http://localhost:3000/#/profile',
     failureRedirect: 'http://localhost:3000/'
 }))
 
@@ -79,6 +79,42 @@ app.get('/auth/me', (req,res) => {
 app.get('/auth/logout', function(req, res) {
     req.logOut();
     res.redirect('http://localhost:3000/')
+})
+
+// ===========================================
+
+app.get('/me/profile/:id', function(req, res) {
+    const db = req.app.get('db')
+
+    var {id} = req.params
+
+    db.get_profile_info([id]).then( result => res.status(200).send(result))
+})
+
+app.get('/me/friends/:id', function(req, res) {
+    const db = req.app.get('db')
+
+    var {id} = req.params
+
+    db.get_friends([id]).then( result => res.status(200).send(result))
+})
+
+app.post(`/me/profile/edit`, function(req, res) {
+    const db = req.app.get('db')
+
+    var {first, last, id} = req.body
+
+    console.log(req.body)
+   
+    db.change_user(first, last, id).then( result => res.status(200).send(result) )
+})
+
+app.get('/me/recommendations/:search', function(req, res) {
+    const db = req.app.get('db')
+
+    var {search} = req.params
+
+    db.get_recommendations([search]).then( result => res.status(200).send(result))
 })
 
 app.listen(SERVER_PORT, _ => {
