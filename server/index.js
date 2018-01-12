@@ -94,17 +94,17 @@ app.get('/me/profile/:id', function(req, res) {
 app.get('/me/friends/:id', function(req, res) {
     const db = req.app.get('db')
 
+    //sim3 76D
     var {id} = req.params
 
     db.get_friends([id]).then( result => res.status(200).send(result))
 })
 
+//sim3 74D-3
 app.post(`/me/profile/edit`, function(req, res) {
     const db = req.app.get('db')
 
     var {first, last, id} = req.body
-
-    console.log(req.body)
    
     db.change_user(first, last, id).then( result => res.status(200).send(result) )
 })

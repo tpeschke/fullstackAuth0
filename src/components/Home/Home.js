@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+//sim3 38C
 export default function Home() {
     return (
         <div className='App'>
